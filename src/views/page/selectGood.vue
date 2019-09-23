@@ -545,7 +545,7 @@ export default {
         obj["学业分排名"] <= per10;
       return is_zero;
     },
-
+    
     is_good_student(obj, allNum) {
       /**
        *判断是否评优
