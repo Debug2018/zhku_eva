@@ -545,9 +545,10 @@ export default {
         obj["学业分排名"] <= per10;
       return is_zero;
     },
-
+    
     is_good_student(obj, allNum) {
       /**
+       *判断是否评优
        * return 0   三好学生标兵
        * return 1   三好学生
        * return 20  优秀学生干部
