@@ -227,7 +227,7 @@
 
           <el-table-column fixed prop="姓名" label="姓名" width="60"></el-table-column>
           <!-- <el-table-column prop="身份证号码" label="身份证号码" width="180"></el-table-column> -->
-          <el-table-column fixed sortable prop="学工号" label="学号" width="100"></el-table-column>
+          <el-table-column fixed sortable prop="学号" label="学号" width="100"></el-table-column>
 
           <!-- <el-table-column prop="性别" label="性别" width="50"></el-table-column> -->
           <!-- <el-table-column prop="学院" label="学院" width="120"></el-table-column> -->
@@ -325,8 +325,8 @@ export default {
       this.showTableData = this.tableData.filter(data => {
         return (
           data["姓名"].includes(search) ||
-          data["学工号"].includes(search) ||
-          data["专业班级"].includes(search) 
+          data["学号"].includes(search) ||
+          data["专业班级"].includes(search)
         );
       });
     },
@@ -409,7 +409,7 @@ export default {
         return {
           姓名: data["姓名"],
           学院: data["学院"],
-          学号: data["学工号"],
+          学号: data["学号"],
           专业: data["专业班级"].replace(/\d{3,4}/, ""),
           年级: data["入学年度"],
           评优类别: data["评优类别"],
@@ -548,6 +548,7 @@ export default {
 
     is_good_student(obj, allNum) {
       /**
+       *判断是否评优
        * return 0   三好学生标兵
        * return 1   三好学生
        * return 20  优秀学生干部
@@ -594,10 +595,13 @@ export default {
       var is_tow_one = obj["学业分排名"] <= per20;
 
       //文体积极分子
+      // if (is_zero) return 0;
       var is_two_two = obj["文体分排名"] <= per20;
 
-      // if (is_zero) return 0;
-      if (is_one) return 1;
+      if (is_one && is_tow_zero) return 120;
+      else if (is_one && is_tow_one) return 121;
+      else if (is_one && is_two_two) return 121;
+      else if (is_one) return 1;
       else if (is_tow_zero) return 20;
       else if (is_tow_one) return 21;
       else if (is_two_two) return 22;
@@ -699,6 +703,51 @@ export default {
             //     this.good_student_bb--;
             //   }
             //   break;
+            case 120:
+              if (dataList[i].good_student > 0) {
+                dataList[i].data[j]["评优类别"] = "三好学生";
+                dataList[i].good_student--;
+                break;
+              }
+              if (
+                dataList[i].good_student <= 0 &&
+                dataList[i].good_activate > 0
+              ) {
+                dataList[i].data[j]["评优类别"] = "优秀学生干部";
+                dataList[i].good_activate--;
+                break;
+              }
+              break;
+            case 121:
+              if (dataList[i].good_student > 0) {
+                dataList[i].data[j]["评优类别"] = "三好学生";
+                dataList[i].good_student--;
+                break;
+              }
+              if (
+                dataList[i].good_student <= 0 &&
+                dataList[i].good_activate > 0
+              ) {
+                dataList[i].data[j]["评优类别"] = "学习积极分子";
+                dataList[i].good_activate--;
+                break;
+              }
+              break;
+            case 122:
+              if (dataList[i].good_student > 0) {
+                dataList[i].data[j]["评优类别"] = "三好学生";
+                dataList[i].good_student--;
+                break;
+              }
+              if (
+                dataList[i].good_student <= 0 &&
+                dataList[i].good_activate > 0
+              ) {
+                dataList[i].data[j]["评优类别"] = "文体积极分子";
+                dataList[i].good_activate--;
+                break;
+              }
+              break;
             case 1:
               if (dataList[i].good_student > 0) {
                 dataList[i].data[j]["评优类别"] = "三好学生";
@@ -816,7 +865,7 @@ export default {
 
     handleSelectionChange(val) {
       if (this.showSelect) {
-        var da = val.map(data => data["学工号"]);
+        var da = val.map(data => data["学号"]);
         console.log(da);
         this.multipleSelection = da;
       }
@@ -841,7 +890,7 @@ export default {
         var length = dataList[i].data.length;
         for (var j = 0; j < length; j++) {
           if (
-            selectData.includes(dataList[i].data[j]["学工号"]) &&
+            selectData.includes(dataList[i].data[j]["学号"]) &&
             this.good_student_bb > 0
           ) {
             dataList[i].data[j]["评优类别"] = "三好学生标兵";
