@@ -4,7 +4,7 @@
 
 ### On-line example
 
-https://zhku.i7code.cn/
+https://chenaey.github.io/zhku_eve
 
 ## Project setup
 ```

@@ -21,22 +21,22 @@
         <div>
           <div>导入数据1</div>
           <a
-            href="http://cdn.i7code.cn/%E6%B5%8B%E8%AF%95020%E7%8F%AD%E7%BB%BC%E6%B5%8B%E6%B1%87%E6%80%BB%E8%A1%A8.xlsx"
+            href="http://imgs.91ans.com/%E6%B5%8B%E8%AF%95020%E7%8F%AD%E7%BB%BC%E6%B5%8B%E6%B1%87%E6%80%BB%E8%A1%A8.xlsx"
           >测试020班综测汇总表.xlsx</a>
 
           <div>导入数据2</div>
           <a
-            href="http://cdn.i7code.cn/%E6%B5%8B%E8%AF%95021%E7%8F%AD%E7%BB%BC%E6%B5%8B%E6%B1%87%E6%80%BB%E8%A1%A8.xlsx"
+            href="http://imgs.91ans.com/%E6%B5%8B%E8%AF%95021%E7%8F%AD%E7%BB%BC%E6%B5%8B%E6%B1%87%E6%80%BB%E8%A1%A8.xlsx"
           >测试021班综测汇总表.xlsx</a>
 
           <div>合并Excel&排序后导出的文件示例</div>
           <a
-            href="http://cdn.i7code.cn/%E6%B5%8B%E8%AF%9502%E7%BA%A7%E7%BB%BC%E6%B5%8B%E6%B1%87%E6%80%BB%E8%A1%A8.xlsx"
+            href="http://imgs.91ans.com/%E6%B5%8B%E8%AF%9502%E7%BA%A7%E7%BB%BC%E6%B5%8B%E6%B1%87%E6%80%BB%E8%A1%A8.xlsx"
           >测试021级综测汇总表.xlsx</a>
 
           <div>综合测评自动评判后导出的文件示例</div>
           <a
-            href="http://cdn.i7code.cn/%E9%99%84%E4%BB%B61%EF%BC%9A%E5%90%84%E5%B9%B4%E7%BA%A7%E4%B8%93%E4%B8%9A%E7%BB%BC%E6%B5%8B%E6%B1%87%E6%80%BB%E8%A1%A8.xlsx"
+            href="http://imgs.91ans.com/%E9%99%84%E4%BB%B61%EF%BC%9A%E5%90%84%E5%B9%B4%E7%BA%A7%E4%B8%93%E4%B8%9A%E7%BB%BC%E6%B5%8B%E6%B1%87%E6%80%BB%E8%A1%A8.xlsx"
           >附件1：各年级专业综测汇总表.xlsx</a>
         </div>
       </el-collapse-item>
