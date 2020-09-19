@@ -45,26 +45,32 @@
 </template>
 <script>
 export default {
-  created: function() {
+  created: function () {
     console.log("Create");
   },
 
   methods: {
     handleChange(val) {
       console.log(val);
-    }
+    },
   },
-  data: function() {
+  data: function () {
     return {
       valueGK: [],
-      activeNames: ["1"]
+      activeNames: ["1"],
     };
-  }
+  },
 };
 </script>>
 
 <style  scoped>
+.el-collapse-item__header {
+  font-size: 24px;
+}
 a {
   text-decoration: none;
+}
+div li {
+  font-size: 20px;
 }
 </style>

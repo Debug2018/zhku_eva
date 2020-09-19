@@ -307,7 +307,7 @@ export default {
   name: "selectGood",
   beforeCreate() {},
   watch: {
-    fileList: function() {
+    fileList: function () {
       var data = this.fileList;
       var count = 0;
       for (var i = 0; i < data.length; i++) {
@@ -321,8 +321,8 @@ export default {
       }
     },
 
-    search: function(search) {
-      this.showTableData = this.tableData.filter(data => {
+    search: function (search) {
+      this.showTableData = this.tableData.filter((data) => {
         return (
           data["姓名"].includes(search) ||
           data["学号"].includes(search) ||
@@ -331,13 +331,13 @@ export default {
       });
     },
 
-    showWhich: function() {
+    showWhich: function () {
       console.log(this.showWhich);
       if (this.fileList.length > 0 && this.showWhich >= 0) {
         this.tableData = this.fileList[this.showWhich].data;
         this.showTableData = this.fileList[this.showWhich].data;
       }
-    }
+    },
   },
   methods: {
     handleRemove(item, index) {
@@ -350,13 +350,14 @@ export default {
 
     importExcel(file, fileList) {
       const fileReader = new FileReader();
-      fileReader.onload = ev => {
+      fileReader.onload = (ev) => {
         try {
           const data = ev.target.result;
           const workbook = XLSX.read(data, {
-            type: "binary"
+            type: "binary",
           });
           let sheet = Object.keys(workbook.Sheets)[0];
+          console.log(sheet);
           const json = XLSX.utils.sheet_to_json(workbook.Sheets[sheet]); //获得以第一列为键名的sheet数组对象
           console.log(json);
 
@@ -375,7 +376,7 @@ export default {
             good_activate_xc: good_activate_xc,
             good_activate_gb: good_activate_gb,
             good_activate_wt: good_activate_wt,
-            standard: standard
+            standard: standard,
           });
           // this.tableData = json;
         } catch (e) {
@@ -392,7 +393,7 @@ export default {
       var needData = [];
 
       for (var i = 0; i < this.fileList.length; i++) {
-        var tempData = this.fileList[i].data.filter(data => {
+        var tempData = this.fileList[i].data.filter((data) => {
           return (
             data["评优类别"] === "三好学生标兵" ||
             data["评优类别"] === "三好学生" ||
@@ -405,7 +406,7 @@ export default {
       }
       console.log(needData);
 
-      needData = needData.map(data => {
+      needData = needData.map((data) => {
         return {
           姓名: data["姓名"],
           学院: data["学院"],
@@ -414,7 +415,7 @@ export default {
           年级: data["入学年度"],
           评优类别: data["评优类别"],
           身份证号码: data["身份证号码"],
-          手机号码: data["手机号码"]
+          手机号码: data["手机号码"],
         };
       });
       console.log(needData);
@@ -496,28 +497,28 @@ export default {
           xy: per10,
           sx: per10,
           wt: per20,
-          zh: per10
+          zh: per10,
         },
         {
           l: "三好学生",
           xy: per30,
           sx: per30,
           wt: per40,
-          zh: per30
+          zh: per30,
         },
         {
           l: "优秀学生干部",
           xy: "无要求",
           sx: per20,
           wt: "无要求",
-          zh: per30
+          zh: per30,
         },
         {
           l: "学习积极分子",
           xy: per20,
           sx: "无要求",
           wt: "无要求",
-          zh: "无要求"
+          zh: "无要求",
         },
         ,
         {
@@ -525,8 +526,8 @@ export default {
           xy: "无要求",
           sx: "无要求",
           wt: per20,
-          zh: "无要求"
-        }
+          zh: "无要求",
+        },
       ];
 
       return list;
@@ -545,7 +546,7 @@ export default {
         obj["学业分排名"] <= per10;
       return is_zero;
     },
-    
+
     is_good_student(obj, allNum) {
       /**
        *判断是否评优
@@ -562,7 +563,11 @@ export default {
       var per40 = Math.round(allNum * 0.4);
 
       //挂科 or 已评 直接return
-      if (obj["是否挂科"] === "是") {
+      if (
+        obj["是否挂科"] === "是" ||
+        obj["是否挂科"] === "有挂科" ||
+        obj["是否挂科"] === "挂科"
+      ) {
         console.log(obj["是否挂科"]);
         return -1;
       }
@@ -653,7 +658,7 @@ export default {
         xy: row["学业分排名"],
         sx: row["思想分排名"],
         wt: row["文体分排名"],
-        zh: row["综合分专业年级排名"]
+        zh: row["综合分专业年级排名"],
       };
       list.unshift(obj);
       this.gridData = list;
@@ -676,7 +681,7 @@ export default {
             showClose: true,
             message: "三好学生标兵符合人数大于应评人数,请手动选择",
             type: "warning",
-            duration: 5000
+            duration: 5000,
           });
           console.log(res);
           // this.showWhat(8);
@@ -782,7 +787,7 @@ export default {
       this.$message({
         showClose: true,
         message: "评选完成",
-        type: "success"
+        type: "success",
       });
     },
 
@@ -800,7 +805,7 @@ export default {
           this.showTableData = this.tableData;
           break;
         case 2:
-          this.showTableData = this.tableData.filter(data => {
+          this.showTableData = this.tableData.filter((data) => {
             return (
               data["评优类别"] === "三好学生标兵" ||
               data["评优类别"] === "三好学生" ||
@@ -811,12 +816,12 @@ export default {
           });
           break;
         case 3:
-          this.showTableData = this.tableData.filter(data => {
+          this.showTableData = this.tableData.filter((data) => {
             return data["评优类别"] === "三好学生";
           });
           break;
         case 4:
-          this.showTableData = this.tableData.filter(data => {
+          this.showTableData = this.tableData.filter((data) => {
             return (
               data["评优类别"] === "学习积极分子" ||
               data["评优类别"] === "文体积极分子" ||
@@ -825,17 +830,17 @@ export default {
           });
           break;
         case 5:
-          this.showTableData = this.tableData.filter(data => {
+          this.showTableData = this.tableData.filter((data) => {
             return data["评优类别"] === "优秀学生干部";
           });
           break;
         case 6:
-          this.showTableData = this.tableData.filter(data => {
+          this.showTableData = this.tableData.filter((data) => {
             return data["评优类别"] === "学习积极分子";
           });
           break;
         case 7:
-          this.showTableData = this.tableData.filter(data => {
+          this.showTableData = this.tableData.filter((data) => {
             return data["评优类别"] === "文体积极分子";
           });
           break;
@@ -865,7 +870,7 @@ export default {
 
     handleSelectionChange(val) {
       if (this.showSelect) {
-        var da = val.map(data => data["学号"]);
+        var da = val.map((data) => data["学号"]);
         console.log(da);
         this.multipleSelection = da;
       }
@@ -878,7 +883,7 @@ export default {
         this.$message({
           showClose: true,
           message: "需选择" + this.good_student_bb + "人",
-          type: "warning"
+          type: "warning",
         });
         return;
       }
@@ -916,10 +921,10 @@ export default {
     },
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
-    }
+    },
   },
 
-  data: function() {
+  data: function () {
     return {
       gridData: [],
 
@@ -942,9 +947,9 @@ export default {
       search: undefined,
       showTable: false,
 
-      filename: "附件1：各年级专业综测汇总表.xlsx" //导出文件名字
+      filename: "附件1：各年级专业综测汇总表.xlsx", //导出文件名字
     };
-  }
+  },
 };
 </script>
 <style scoped>

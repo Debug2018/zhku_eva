@@ -152,7 +152,7 @@
 
           <el-table-column fixed prop="姓名" label="姓名" width="60"></el-table-column>
           <!-- <el-table-column prop="身份证号码" label="身份证号码" width="180"></el-table-column> -->
-          <el-table-column fixed sortable prop="学工号" label="学号" width="110"></el-table-column>
+          <el-table-column fixed sortable prop="学号" label="学号" width="110"></el-table-column>
 
           <!-- <el-table-column prop="性别" label="性别" width="50"></el-table-column> -->
           <!-- <el-table-column prop="学院" label="学院" width="120"></el-table-column> -->
@@ -201,7 +201,7 @@ export default {
   name: "selectGood",
   beforeCreate() {},
   watch: {
-    fileList: function() {
+    fileList: function () {
       var data = this.fileList;
       var count = 0;
       for (var i = 0; i < data.length; i++) {
@@ -215,7 +215,7 @@ export default {
       }
     },
 
-    showWhich: function() {
+    showWhich: function () {
       console.log(this.showWhich);
       if (this.finishFileList.length > 0 && this.showWhich >= 0) {
         this.tableData = this.finishFileList[this.showWhich].data;
@@ -223,15 +223,15 @@ export default {
       }
     },
 
-    search: function(search) {
-      this.showTableData = this.tableData.filter(data => {
+    search: function (search) {
+      this.showTableData = this.tableData.filter((data) => {
         return (
           data["姓名"].includes(search) ||
-          data["学工号"].includes(search) ||
+          data["学号"].includes(search) ||
           data["专业班级"].includes(search)
         );
       });
-    }
+    },
   },
   methods: {
     handleRemove(item, index) {
@@ -242,8 +242,8 @@ export default {
       this.finishFileList.splice(index, 1);
     },
 
-    handleExpore(item, index){
-      var data =this.finishFileList[index]
+    handleExpore(item, index) {
+      var data = this.finishFileList[index];
       this.exportExcel(data);
     },
 
@@ -340,19 +340,12 @@ export default {
 
       var str = this.fileList[0].name;
       var num = str.match(/\d{3}/)[0].slice(2, 3);
-      var s = str
-        .split("")
-        .reverse()
-        .join("");
-      var name = s
-        .replace(num, "级")
-        .split("")
-        .reverse()
-        .join("");
+      var s = str.split("").reverse().join("");
+      var name = s.replace(num, "级").split("").reverse().join("");
 
       var obj = {
         name: name,
-        data: data
+        data: data,
       };
 
       console.log(obj);
@@ -363,11 +356,11 @@ export default {
 
     importExcel(file, fileList) {
       const fileReader = new FileReader();
-      fileReader.onload = ev => {
+      fileReader.onload = (ev) => {
         try {
           const data = ev.target.result;
           const workbook = XLSX.read(data, {
-            type: "binary"
+            type: "binary",
           });
           let sheet = Object.keys(workbook.Sheets)[0];
           const json = XLSX.utils.sheet_to_json(workbook.Sheets[sheet]); //获得以第一列为键名的sheet数组对象
@@ -375,7 +368,7 @@ export default {
 
           this.fileList.push({
             name: file.name,
-            data: json
+            data: json,
           });
           // this.tableData = json;
         } catch (e) {
@@ -392,7 +385,7 @@ export default {
       var needData = [];
 
       for (var i = 0; i < this.fileList.length; i++) {
-        var tempData = this.fileList[i].data.filter(data => {
+        var tempData = this.fileList[i].data.filter((data) => {
           return (
             data["评优类别"] === "三好学生标兵" ||
             data["评优类别"] === "三好学生" ||
@@ -405,16 +398,18 @@ export default {
       }
       console.log(needData);
 
-      needData = needData.map(data => {
+      needData = needData.map((data) => {
         return {
           姓名: data["姓名"],
           学院: data["学院"],
-          学号: data["学工号"],
-          专业: data["专业班级"].replace(/\d{3,4}/, ""),
-          年级: data["入学年度"],
+          学号: data["学号"],
+          专业: data["专业"]
+            ? data["专业"].replace(/\d{3,4}/, "")
+            : data["专业"],
+          年级: data["年级"],
           评优类别: data["评优类别"],
           身份证号码: data["身份证号码"],
-          手机号码: data["手机号码"]
+          手机号码: data["手机号码"],
         };
       });
       console.log(needData);
@@ -450,10 +445,10 @@ export default {
     //没有用到的方法 临时解决报错问题
     handleSearch() {
       console.log("S");
-    }
+    },
   },
 
-  data: function() {
+  data: function () {
     return {
       gridData: [],
 
@@ -465,9 +460,9 @@ export default {
       fileList: [],
       finishFileList: [],
       search: undefined,
-      filename: "请输入导出文件名字" //导出文件名字
+      filename: "请输入导出文件名字", //导出文件名字
     };
-  }
+  },
 };
 </script>
 
