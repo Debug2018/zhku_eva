@@ -460,7 +460,7 @@ export default {
       fileList: [],
       finishFileList: [],
       search: undefined,
-      filename: "请输入导出文件名字", //导出文件名字
+      filename: "请输入导出文件名字" //导出文件名字
     };
   },
 };
